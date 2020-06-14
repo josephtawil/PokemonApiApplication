@@ -5,7 +5,7 @@ const fs = require("fs");
 const util = require("util");
 
 const readFile = util.promisify(fs.readFile);
-// const writeFileSync = util.promisify(fs.writeFileSync);
+const writeFileSync = util.promisify(fs.writeFileSync);
 router.get("/api", (req, res) => {
     res.json({ msg: "Success" });
 });
@@ -16,10 +16,12 @@ router.get("/api/all", async (req, res) => {
     //we dont need to write anything just read from the file and parse the json data
     // await writeFileSync("data.json", JSON.stringify(pokemonData, null, 2));
     res.json(pokemonData);
+    // let data = fs.readFileSync("data.json", "utf8");
+    // data = JSON.parse(data);
+    // res.json(data.pokemon);
 });
 
-// router.get("/api/add", async (req,res)=>
-// {
-
-// });
+router.post("/api/add", (req, res) => {
+    res.json(req.body);
+});
 module.exports = router;
